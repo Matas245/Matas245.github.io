@@ -466,25 +466,3 @@ button:active {
 		transform: scaleX(1);
 	}
 }
-
-@media (prefers-reduced-motion: reduce) {
-	.hero .social-links a,
-	#about .col-lg-4 img,
-	#about .col-lg-4::before,
-	#about .col-lg-4::after,
-	.services-loader::before,
-	#services.section,
-	.section-title h2::before,
-	.section-title h2::after {
-		animation: none;
-	}
-
-	.hero .social-links a {
-		transition: none;
-	}
-
-	.hero .social-links a:hover,
-	.hero .social-links a:focus-visible {
-		transform: none;
-	}
-}

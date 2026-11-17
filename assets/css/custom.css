@@ -422,6 +422,168 @@ button:active {
 	animation: profile-image-float 4s ease-in-out infinite;
 }
 
+.contact .rating-field .form-label {
+	min-height: 2.8em;
+	margin-bottom: 1rem;
+	color: var(--heading-color);
+	font-weight: 600;
+}
+
+.contact .rating-field .form-range {
+	position: relative;
+	z-index: 1;
+	height: 1.5rem;
+	cursor: grab;
+	touch-action: pan-y;
+}
+
+.contact .rating-field .form-range:active {
+	cursor: grabbing;
+}
+
+.contact .rating-field .form-range::-webkit-slider-runnable-track {
+	height: 0.45rem;
+	border-radius: 999px;
+	background: linear-gradient(
+		to right,
+		var(--accent-color) 0%,
+		var(--accent-color) var(--rating-progress, 50%),
+		#d8e3dc var(--rating-progress, 50%),
+		#d8e3dc 100%
+	);
+}
+
+.contact .rating-field .form-range::-moz-range-track {
+	height: 0.45rem;
+	border-radius: 999px;
+	background: linear-gradient(
+		to right,
+		var(--accent-color) 0%,
+		var(--accent-color) var(--rating-progress, 50%),
+		#d8e3dc var(--rating-progress, 50%),
+		#d8e3dc 100%
+	);
+}
+
+.contact .rating-field .form-range::-webkit-slider-thumb {
+	width: 1.4rem;
+	height: 1.4rem;
+	margin-top: -0.475rem;
+	border: 3px solid #fff;
+	border-radius: 50%;
+	background-color: var(--accent-color);
+	box-shadow: 0 0 0 2px var(--accent-color);
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.contact .rating-field .form-range::-moz-range-thumb {
+	width: 1.1rem;
+	height: 1.1rem;
+	border: 3px solid #fff;
+	border-radius: 50%;
+	background-color: var(--accent-color);
+	box-shadow: 0 0 0 2px var(--accent-color);
+}
+
+.contact .rating-field .form-range:focus {
+	outline: none;
+}
+
+.contact .rating-field .form-range:focus::-webkit-slider-thumb {
+	box-shadow: 0 0 0 2px var(--accent-color), 0 0 0 6px rgba(47, 125, 82, 0.18);
+}
+
+.contact .rating-field .form-range:focus::-moz-range-thumb {
+	box-shadow: 0 0 0 2px var(--accent-color), 0 0 0 6px rgba(47, 125, 82, 0.18);
+}
+
+.contact .rating-field output {
+	display: inline-flex;
+	min-width: 2rem;
+	justify-content: center;
+	border-radius: 999px;
+	background-color: var(--accent-color);
+	color: #fff;
+	font-size: 0.875rem;
+	font-weight: 700;
+	line-height: 1.5rem;
+}
+
+.contact .rating-field > .d-flex > span {
+	color: color-mix(in srgb, var(--default-color), transparent 25%);
+	font-size: 0.8rem;
+}
+
+.contact .contact-form-results {
+	margin-top: 1.5rem;
+	padding: 0.75rem 1rem;
+	border-left: 4px solid var(--accent-color);
+	border-radius: 0.25rem;
+	background-color: #f0eee3;
+	color: var(--default-color);
+}
+
+.contact .contact-form-results p {
+	margin: 0.15rem 0;
+	font-style: italic;
+}
+
+.contact .contact-form-results .rating-average {
+	margin-top: 0.75rem;
+	padding-top: 0.5rem;
+	border-top: 1px solid #d8e3dc;
+	color: var(--heading-color);
+	font-weight: 700;
+}
+
+.contact .php-email-form button[type=submit]:disabled {
+	background: #aebdb2;
+	cursor: not-allowed;
+	opacity: 0.75;
+}
+
+.contact .php-email-form button[type=reset] {
+  color: var(--heading-color);
+  border: 1px solid var(--accent-color);
+  padding: 10px 30px;
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+.contact .php-email-form button[type=reset]:hover {
+  background: color-mix(in srgb, var(--heading-color), transparent 75%);
+}
+
+.contact .php-email-form .field-error {
+	display: block;
+	margin-top: 0.35rem;
+	color: #b42318;
+	font-size: 0.875rem;
+}
+
+.contact .php-email-form .field-error[hidden] {
+	display: none;
+}
+
+.contact .php-email-form .has-validation-error > input:not([type=range]) {
+	border-color: #b42318;
+}
+
+.contact .php-email-form .has-validation-error > input:not([type=range]):focus {
+	border-color: #b42318;
+	box-shadow: 0 0 0 0.15rem rgba(180, 35, 24, 0.15);
+	animation: none;
+}
+
+.contact .rating-field.has-validation-error .form-range::-webkit-slider-thumb {
+	box-shadow: 0 0 0 2px #b42318;
+}
+
+.contact .rating-field.has-validation-error .form-range::-moz-range-thumb {
+	box-shadow: 0 0 0 2px #b42318;
+}
+
 @keyframes profile-image-float {
 	0%,
 	100% {

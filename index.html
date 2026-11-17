@@ -488,58 +488,65 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
+        <h2>Kontaktai</h2>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade" data-aos-delay="100">
 
         <div class="row gy-4">
 
-          <div class="col-lg-4">
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
-              <i class="bi bi-geo-alt flex-shrink-0"></i>
-              <div>
-                <h3>Address</h3>
-                <p>A108 Adam Street, New York, NY 535022</p>
-              </div>
-            </div><!-- End Info Item -->
-
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
-              <i class="bi bi-telephone flex-shrink-0"></i>
-              <div>
-                <h3>Call Us</h3>
-                <p>+1 5589 55488 55</p>
-              </div>
-            </div><!-- End Info Item -->
-
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-              <i class="bi bi-envelope flex-shrink-0"></i>
-              <div>
-                <h3>Email Us</h3>
-                <p>info@example.com</p>
-              </div>
-            </div><!-- End Info Item -->
-
-          </div>
-
-          <div class="col-lg-8">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-lg-12">
+            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200" novalidate>
               <div class="row gy-4">
 
                 <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                  <input type="text" name="name" class="form-control" placeholder="Jūsų vardas" required="">
+                </div>
+
+                <div class="col-md-6">
+                  <input type="text" name="surname" class="form-control" placeholder="Jūsų pavardė" required="">
                 </div>
 
                 <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                  <input type="email" class="form-control" name="email" placeholder="Jūsų el. paštas" required="">
+                </div>
+
+                <div class="col-md-6 ">
+                  <input type="tel" class="form-control" name="phone" value="+370 6" placeholder="xx xxxxx" inputmode="numeric" autocomplete="tel" maxlength="14" required="">
                 </div>
 
                 <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                  <input type="text" class="form-control" name="address" placeholder="Adresas" required="">
                 </div>
 
-                <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                <div class="col-md-4 rating-field">
+                  <label class="form-label" for="design-rating">Kaip vertinate svetainės dizainą?</label>
+                  <input type="range" class="form-range contact-rating" id="design-rating" name="design_rating" min="1" max="10" value="5">
+                  <div class="d-flex justify-content-between">
+                    <span>1</span>
+                    <output for="design-rating">5</output>
+                    <span>10</span>
+                  </div>
+                </div>
+
+                <div class="col-md-4 rating-field">
+                  <label class="form-label" for="content-rating">Kaip vertinate svetainėje pateiktą informaciją?</label>
+                  <input type="range" class="form-range contact-rating" id="content-rating" name="content_rating" min="1" max="10" value="5">
+                  <div class="d-flex justify-content-between">
+                    <span>1</span>
+                    <output for="content-rating">5</output>
+                    <span>10</span>
+                  </div>
+                </div>
+
+                <div class="col-md-4 rating-field">
+                  <label class="form-label" for="usability-rating">Kaip vertinate svetainės patogumą?</label>
+                  <input type="range" class="form-range contact-rating" id="usability-rating" name="usability_rating" min="1" max="10" value="5">
+                  <div class="d-flex justify-content-between">
+                    <span>1</span>
+                    <output for="usability-rating">5</output>
+                    <span>10</span>
+                  </div>
                 </div>
 
                 <div class="col-md-12 text-center">
@@ -547,11 +554,14 @@
                   <div class="error-message"></div>
                   <div class="sent-message">Your message has been sent. Thank you!</div>
 
-                  <button type="submit">Send Message</button>
+                  <button type="reset">Išvalyti</button>
+
+                  <button type="submit" disabled>Siųsti</button>
                 </div>
 
               </div>
             </form>
+            <div id="contact-form-results" class="contact-form-results" aria-live="polite" hidden></div>
           </div><!-- End Contact Form -->
 
         </div>
@@ -608,6 +618,7 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/custom.js"></script>
 
 </body>
 

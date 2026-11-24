@@ -185,3 +185,194 @@ if (contactForm && contactFormResults) {
     contactFormResults.hidden = false;
   }, true);
 }
+
+const skills = [
+  { name: 'HTML semantika', status: 'Atlikta', xp: 80 },
+  { name: 'CSS ir prisitaikomas dizainas', status: 'Atlikta', xp: 70 },
+  { name: 'JavaScript programavimas', status: 'Mokomasi', xp: 65 },
+  { name: 'Git ir GitHub', status: 'Atlikta', xp: 60 },
+  { name: 'REST API integracija', status: 'Mokomasi', xp: 55 },
+  { name: 'SQL duomenų bazės', status: 'Planuojama', xp: 50 },
+  { name: 'Naudotojo patirties testavimas', status: 'Planuojama', xp: 45 },
+  { name: 'Žiniatinklio saugumas', status: 'Mokomasi', xp: 35 }
+];
+
+const skillStatusStorageKey = 'cv-skill-statuses-v1';
+const validSkillStatuses = ['Planuojama', 'Mokomasi', 'Atlikta'];
+
+function loadSkillStatuses() {
+  const savedData = localStorage.getItem(skillStatusStorageKey);
+  if (savedData === null) {
+    return;
+  }
+
+  const savedStatuses = JSON.parse(savedData);
+  if (!savedStatuses || typeof savedStatuses !== 'object' || Array.isArray(savedStatuses)) {
+    throw new TypeError('Išsaugotos įgūdžių būsenos turi būti objektas.');
+  }
+
+  skills.forEach((skill) => {
+    if (!Object.prototype.hasOwnProperty.call(savedStatuses, skill.name)) {
+      return;
+    }
+
+    const savedStatus = savedStatuses[skill.name];
+    if (!validSkillStatuses.includes(savedStatus)) {
+      throw new TypeError(`Netinkama išsaugota įgūdžio „${skill.name}“ būsena.`);
+    }
+
+    skill.status = savedStatus;
+  });
+}
+
+function saveSkillStatuses(changedSkill, newStatus) {
+  const statuses = Object.fromEntries(skills.map((skill) => [skill.name, skill.status]));
+  statuses[changedSkill.name] = newStatus;
+  localStorage.setItem(skillStatusStorageKey, JSON.stringify(statuses));
+}
+
+function updateSkillAvatar(level, rank) {
+  const avatar = document.getElementById('skill-level-avatar');
+  let avatarPath;
+
+  if (level === 1) {
+    avatarPath = 'assets/img/skill-avatar-level-1.svg';
+  } else if (level === 2) {
+    avatarPath = 'assets/img/skill-avatar-level-2.svg';
+  } else if (level === 3) {
+    avatarPath = 'assets/img/skill-avatar-level-3.svg';
+  } else {
+    avatarPath = 'assets/img/skill-avatar-level-4.svg';
+  }
+
+  avatar.src = avatarPath;
+  avatar.alt = `Vartotojo personažas: ${rank}, ${level} lygis`;
+}
+
+function updateAchievements(completedSkillCount, level) {
+  const achievements = [
+    { id: 'achievement-discoverer', unlocked: completedSkillCount >= 1 },
+    { id: 'achievement-master', unlocked: completedSkillCount >= 4 },
+    { id: 'achievement-expert', unlocked: level >= 4 }
+  ];
+
+  achievements.forEach((achievement) => {
+    const card = document.getElementById(achievement.id);
+    card.classList.toggle('is-unlocked', achievement.unlocked);
+    card.classList.toggle('is-locked', !achievement.unlocked);
+    card.querySelector('.achievement-status').textContent = achievement.unlocked ? 'Atrakinta' : 'Neatrakinta';
+  });
+}
+
+function createSkillCard(skill) {
+  const card = document.createElement('article');
+  card.className = 'skill-card';
+
+  const header = document.createElement('div');
+  header.className = 'skill-card-header';
+
+  const title = document.createElement('h5');
+  title.textContent = skill.name;
+
+  const xp = document.createElement('span');
+  xp.className = 'skill-xp';
+  xp.textContent = `${skill.xp} XP`;
+
+  header.append(title, xp);
+
+  const statusSelect = document.createElement('select');
+  statusSelect.className = 'skill-status';
+
+  ['Planuojama', 'Mokomasi', 'Atlikta'].forEach((status) => {
+    const option = document.createElement('option');
+    option.value = status;
+    option.textContent = status;
+    option.selected = skill.status === status;
+    statusSelect.append(option);
+  });
+
+  statusSelect.addEventListener('change', () => {
+    const newStatus = statusSelect.value;
+
+    try {
+      saveSkillStatuses(skill, newStatus);
+    } catch (error) {
+      statusSelect.value = skill.status;
+      throw error;
+    }
+
+    skill.status = newStatus;
+    renderSkillKanban();
+  });
+
+  card.append(header, statusSelect);
+  return card;
+}
+
+function renderSkillKanban() {
+  const columns = {
+    'Planuojama': document.getElementById('kanban-planned'),
+    'Mokomasi': document.getElementById('kanban-learning'),
+    'Atlikta': document.getElementById('kanban-completed')
+  };
+
+  Object.values(columns).forEach((column) => column.replaceChildren());
+
+  skills.forEach((skill) => {
+    const column = columns[skill.status];
+    if (column) {
+      column.append(createSkillCard(skill));
+    }
+  });
+
+  const completedSkills = skills.filter((skill) => skill.status === 'Atlikta');
+  const completedXp = completedSkills.reduce((total, skill) => total + skill.xp, 0);
+  const completedPercent = skills.length === 0 ? 0 : Math.round((completedSkills.length / skills.length) * 100);
+
+  let level;
+  let rank;
+  let levelStartXp;
+  let nextLevelXp;
+
+  if (completedXp >= 300) {
+    level = 4;
+    rank = 'Profesionalas';
+    levelStartXp = 300;
+    nextLevelXp = 300;
+  } else if (completedXp >= 150) {
+    level = 3;
+    rank = 'Specialistas';
+    levelStartXp = 150;
+    nextLevelXp = 300;
+  } else if (completedXp >= 50) {
+    level = 2;
+    rank = 'Praktikantas';
+    levelStartXp = 50;
+    nextLevelXp = 150;
+  } else {
+    level = 1;
+    rank = 'Pradedantysis';
+    levelStartXp = 0;
+    nextLevelXp = 50;
+  }
+
+  const isMaxLevel = level === 4;
+  const progressPercent = isMaxLevel ? 100 : Math.round(((completedXp - levelStartXp) / (nextLevelXp - levelStartXp)) * 100);
+
+  document.getElementById('skill-total-xp').textContent = `${completedXp} XP`;
+  document.getElementById('skill-level').textContent = level;
+  document.getElementById('skill-rank').textContent = rank;
+  updateSkillAvatar(level, rank);
+  document.getElementById('skill-count').textContent = skills.length;
+  document.getElementById('completed-skill-count').textContent = completedSkills.length;
+  document.getElementById('completed-skill-percent').textContent = `${completedPercent}%`;
+  updateAchievements(completedSkills.length, level);
+  document.getElementById('level-progress-title').textContent = isMaxLevel ? 'Maksimalus lygis pasiektas' : `Progresas iki ${level + 1} lygio`;
+  document.getElementById('level-progress-xp').textContent = isMaxLevel ? `${completedXp} XP` : `${completedXp} / ${nextLevelXp} XP`;
+  document.getElementById('level-progress-fill').style.width = `${progressPercent}%`;
+}
+
+if (document.querySelector('.skill-kanban')) {
+  loadSkillStatuses();
+  renderSkillKanban();
+}

@@ -44,6 +44,7 @@
         <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i><span>Patirtis</span></a></li>
         <li><a href="#portfolio"><i class="bi bi-images navicon"></i><span>Portfelis</span></a></li>
         <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i><span>Paslaugos</span></a></li>
+        <li><a href="#skill-progress"><i class="bi bi-trophy navicon"></i><span>Pažanga</span></a></li>
         <li><a href="#contact"><i class="bi bi-envelope navicon"></i><span>Kontaktai</span></a></li>
       </ul>
     </nav>
@@ -482,6 +483,90 @@
       </div>
 
     </section><!-- /Services Section -->
+
+    <!-- Skill Progress Section -->
+    <section id="skill-progress" class="skill-progress section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Kompetencijų pažanga</h2>
+        <p>Interaktyvus vartotojo įgūdžių progreso modulis.</p>
+      </div>
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <h3 class="kanban-title">Įgūdžių Kanban lenta</h3>
+        <div class="skill-progress-summary" aria-live="polite">
+          <img id="skill-level-avatar" class="skill-level-avatar" src="assets/img/skill-avatar-level-1.svg" alt="Vartotojo personažas, 1 lygis" width="68" height="72">
+          <p class="skill-total-xp">Bendras XP <strong id="skill-total-xp">0 XP</strong></p>
+          <p class="skill-total-xp">Lygis <strong id="skill-level">1</strong></p>
+          <p class="skill-total-xp">Rangas <strong id="skill-rank">Pradedantysis</strong></p>
+          <div class="level-progress">
+            <div id="level-progress-bar" class="level-progress-bar" role="progressbar" aria-label="Progresas iki sekančio lygio" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div id="level-progress-fill" class="level-progress-fill"></div>
+              <div class="level-progress-labels">
+                <span id="level-progress-title">Progresas iki 2 lygio</span>
+                <span id="level-progress-xp">0 / 50 XP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="skill-stats" aria-label="Įgūdžių pažangos statistika" aria-live="polite">
+          <div class="skill-stat">
+            <strong id="skill-count">0</strong>
+            <span>Visi įgūdžiai</span>
+          </div>
+          <div class="skill-stat">
+            <strong id="completed-skill-count">0</strong>
+            <span>Atlikta</span>
+          </div>
+          <div class="skill-stat">
+            <strong id="completed-skill-percent">0%</strong>
+            <span>Atlikta procentais</span>
+          </div>
+        </div>
+        <div class="skill-kanban">
+          <div class="kanban-column">
+            <h4>Planuojama</h4>
+            <div id="kanban-planned" class="kanban-list"></div>
+          </div>
+          <div class="kanban-column">
+            <h4>Mokomasi</h4>
+            <div id="kanban-learning" class="kanban-list"></div>
+          </div>
+          <div class="kanban-column">
+            <h4>Atlikta</h4>
+            <div id="kanban-completed" class="kanban-list"></div>
+          </div>
+        </div>
+        <div class="achievements-section">
+          <h4 class="achievements-title">Pasiekimai</h4>
+          <div class="achievements-grid">
+            <article id="achievement-discoverer" class="achievement-card is-locked">
+              <span class="achievement-icon"><i class="bi bi-lightbulb" aria-hidden="true"></i></span>
+              <div class="achievement-content">
+                <h5>Įgūdžių atradėjas</h5>
+                <p>Atlikite bent 1 įgūdį</p>
+                <span class="achievement-status">Neatrakinta</span>
+              </div>
+            </article>
+            <article id="achievement-master" class="achievement-card is-locked">
+              <span class="achievement-icon"><i class="bi bi-stars" aria-hidden="true"></i></span>
+              <div class="achievement-content">
+                <h5>Įgūdžių meistras</h5>
+                <p>Atlikite bent 4 įgūdžius</p>
+                <span class="achievement-status">Neatrakinta</span>
+              </div>
+            </article>
+            <article id="achievement-expert" class="achievement-card is-locked">
+              <span class="achievement-icon"><i class="bi bi-award" aria-hidden="true"></i></span>
+              <div class="achievement-content">
+                <h5>Įgūdžių ekspertas</h5>
+                <p>Pasiekite 4 lygį</p>
+                <span class="achievement-status">Neatrakinta</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section><!-- /Skill Progress Section -->
 
     <!-- Contact Section -->
     <section id="contact" class="contact section">
